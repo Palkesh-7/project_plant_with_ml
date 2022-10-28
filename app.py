@@ -34,7 +34,7 @@ model = load_model('potatoes.h5')
 model.make_predict_function()
 
 
-crop_recommendation_model_path = 'models/RandomForest.pkl'
+crop_recommendation_model_path = 'model/RandomForest.pkl'
 crop_recommendation_model = pickle.load(
     open(crop_recommendation_model_path, 'rb'))
 
@@ -90,9 +90,13 @@ def predict_label(image):
 
 
 @app.route("/")
-def main():
-    return render_template("index.html")
+def home():
+    title = 'Harvestify - Home'
+    return render_template('index.html', title=title)
 
+@app.route('/disease-predict', methods=['GET', 'POST'])
+def disease_prediction():
+    return render_template("disease_detaction.html")
 
 @app.route('/jsTakePic',methods=['POST','GET'])
 def jsTakePic():

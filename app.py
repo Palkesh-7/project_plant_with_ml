@@ -98,6 +98,7 @@ def home():
 def disease_prediction():
     return render_template("disease_detaction.html")
 
+
 @app.route('/jsTakePic',methods=['POST','GET'])
 def jsTakePic():
     return render_template('jsTakePic.html')
@@ -105,6 +106,7 @@ def jsTakePic():
   
 @app.route("/shot",methods = ['GET', 'POST'])
 def shot():
+    title = 'Vasudha - Disease Detection'
     if request.method == 'POST':
         
         data = request.form['image']
@@ -131,26 +133,34 @@ def shot():
 
         
         result2 = predict_label(img_path2)
-        prediction = Markup(str(disease_dic[result2["class"]]))
-        if (result2["confidence"]>=0.6):
-            return render_template("output.html", prediction=result2["class"],confidence = result2["confidence"],img_path = img_path2,rd = prediction)
+        treatment = Markup(str(disease_dic[result2["class"]]))
+
+        
+        
+
+        if (result2["confidence"]>=70):
+            return render_template("output.html", prediction=result2["class"],confidence = result2["confidence"],img_path = img_path2,treatment = treatment,title=title)
         else:
             return render_template("output.html",msg = "No Match Found")
 
 @app.route("/submit", methods=['GET', 'POST'])
 def get_output():
+    title = 'Vasudha - Disease Detection'
     if request.method == 'POST':
         img1 = request.files['my_image']
         img_path1 = "static/upload" + img1.filename	
         img1.save(img_path1)
         result1 = predict_label(img_path1)
-        prediction = Markup(str(disease_dic[result1["class"]]))
+        treatment = Markup(str(disease_dic[result1["class"]]))
 
         if (result1["confidence"]>=0.6):
-            return render_template("output.html", prediction=result1["class"],confidence = result1["confidence"],img_path = img_path1,rd = prediction)
+            return render_template("output.html", prediction=result1["class"],confidence = result1["confidence"],img_path = img_path1,treatment = treatment,title=title)
 
         else:
             return render_template("output.html",msg = "No Match Found")
+
+
+
 
 @ app.route('/crop-recommend')
 def crop_recommend():

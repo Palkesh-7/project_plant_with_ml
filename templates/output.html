@@ -32,7 +32,7 @@
         </nav>
       </header>
 
-      <div class="content">
+      <!-- <div class="content"> -->
         
         <h2 class="title">Diagnosed Disease</h2>
         <br/><br />
@@ -43,13 +43,29 @@
           <img src="{{img_path}}" height="480px" width="640px" />
           <h2>Your Prediction : <i> {{prediction}} </i></h2>
           <h2>Prediction confidence : <i> {{confidence}} </i></h2>
-          <p class="text-center" style="color: black; font-size: 22px;">{{ prediction }}</p>
+          <div class="container py-2 mx-auto my-50 h-10 " style="margin: 9rem;">
+            <div class="row">
+                <div class="col-sm py-2 py-md-3">
+                    <div class="card card-body" style="justify-content: center; background-color:white">
+                      <p class="text-center" style="color: black; font-size: 22px;">{{ treatment }}</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="container py-2 mx-auto my-50 h-10 " style="margin: 9rem;">
+            <div class="row">
+                <div class="col-sm py-2 py-md-3">
+                    <div class="card card-body" style="justify-content: center; background-color:white">
+                      <p class="text-center" style="color: black; font-size: 22px;">{{ msg }}</p>
+                    </div>
+                </div>
+            </div>
+          </div>
 
-          <h2>{{msg}}</h2>
 
           {% endif %}
         </div>
-      </div>
+      <!-- </div> -->
     </div>
 
   </body>
